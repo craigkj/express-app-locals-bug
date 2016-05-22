@@ -1,5 +1,7 @@
 ## Potential bug with express request object.
 
+NOTE: https://github.com/expressjs/express/issues/3004 Issue confirmed as not a bug, not really a feature either but necessary implementation detail for providing details of app to the response.
+
 The request object has a value at `req.app.locals` which contains the values of `app.locals` which is typically used for app wide config/settings and is set up when the server is started. It seems that this value is in fact a `reference` to the app.locals object rather than a clone, meaning that changes to `req.app.locals.x` will change that value at source and thus for the entire application, rather than just for the request in question as you might expect.
 
 **Example:**
