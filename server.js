@@ -10,13 +10,13 @@ app.locals = {
 Greeting function wants to use the value from app.locals but does not have a
 direct reference to `app` so uses req.app.locals instead...
 */
-function getGreeting() {
+function getGreeting(req) {
     return 'Hello ' + req.app.locals.name;
 }
 
 // Calls the above Greeting Function to render output
 app.get('/', function (req, res) {
-    res.send(getGreeting());
+    res.send(getGreeting(req));
 });
 
 /*
@@ -34,7 +34,7 @@ of the expected `Hello World`.
 */
 app.get('/break', function(req, res) {
     req.app.locals.name = 'Everyone';
-    res.send(getGreeting());
+    res.send(getGreeting(req));
 });
 
 app.listen(3000, function () {
